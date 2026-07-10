@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+</head>
+<body>
+    <p>Stop this timer in <span id="stopValue"></span></p>
+    <p id="Value">0.00</p>
+    <div>
+        <button id="reset">Reset</button>
+        <button id="stop">Stop</button>
+        <button id="start">Start</button>
+    </div>
+
+    <script>
+        const stopValue = document.getElementById('stopValue');
+        const Value = document.getElementById('Value');
+        const reset = document.getElementById('reset');
+        const stop = document.getElementById('stop');
+        const start = document.getElementById('start');
+
+        const formatTime = value => (value / 100).toFixed(2);
+
+        const target = Math.floor(Math.random() * 9901) + 100; // 1.00 to 100.00 in hundredths
+        stopValue.innerHTML = formatTime(target);
+        let count = 0; // count in hundredths
+        let interval;
+
+        const updateDisplay = () => {
+            Value.innerHTML = formatTime(count);
+        };
+
+        const setStopButton = text => {
+            stop.textContent = text;
+        };
+
+        const startTimer = () => {
+            if (interval) return;
+            interval = setInterval(() => {
+                count++;
+                updateDisplay();
+            }, 10);
+            setStopButton('Stop');
+        };
+
+        start.addEventListener('click', startTimer);
+
+        stop.addEventListener('click', () => {
+            if (interval) {
+                clearInterval(interval);
+                interval = null;
+                setStopButton('Continue');
+                return;
+            }
+
+            startTimer();
+        });
+
+        reset.addEventListener('click', () => {
+            if (interval) {
+                clearInterval(interval);
+                interval = null;
+            }
+            count = 0;
+            updateDisplay();
+            setStopButton('Stop');
+        })
+        
+    </script>
+</body>
+</html>
