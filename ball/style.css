@@ -1,65 +1,110 @@
-* {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        font-family: Arial;
-        background: #111;
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-      }
-      #wrap {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-      }
-      #hud {
-        display: flex;
-        gap: 20px;
-        font-weight: bold;
-      }
-      #game {
-        width: 700px;
-        height: 450px;
-        position: relative;
-        background: #1b1b1b;
-        border: 3px solid #0ff;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 0 25px cyan;
-      }
-      #player {
-        position: absolute;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        background: #f33;
-        box-shadow: 0 0 15px red;
-      }
-      .coin {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: gold;
-      }
-      .enemy {
-        position: absolute;
-        width: 30px;
-        height: 30px;
-        background: #7f5cff;
-      }
-      .ob {
-        position: absolute;
-        background: #666;
-      }
-      #msg {
-        font-size: 24px;
-      }
-      button {
-        padding: 8px 18px;
-      }
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Segoe UI, Arial, sans-serif;
+    background:linear-gradient(135deg,#f7f8fc,#e8edf8);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    color:#4b5563;
+}
+
+#wrap{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+}
+
+#hud{
+    display:flex;
+    gap:25px;
+    font-size:17px;
+    font-weight:600;
+    color:#64748b;
+}
+
+#game{
+    width:700px;
+    height:450px;
+    position:relative;
+    overflow:hidden;
+
+    background:#ffffff;
+    border:2px solid #dbe4f0;
+    border-radius:20px;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.08);
+}
+
+#player{
+    position:absolute;
+    width:32px;
+    height:32px;
+    border-radius:50%;
+
+    background:#7dd3fc;
+    box-shadow:
+        0 6px 12px rgba(125,211,252,.35);
+}
+
+.coin{
+    position:absolute;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+
+    background:#fde68a;
+    box-shadow:
+        0 4px 10px rgba(253,230,138,.45);
+}
+
+.enemy{
+    position:absolute;
+    width:30px;
+    height:30px;
+    border-radius:8px;
+
+    background:#f9a8d4;
+    box-shadow:
+        0 5px 12px rgba(249,168,212,.35);
+}
+
+.ob{
+    position:absolute;
+    border-radius:10px;
+    background:#d6d3d1;
+}
+
+#msg{
+    font-size:24px;
+    font-weight:600;
+    color:#475569;
+}
+
+button{
+    padding:10px 22px;
+    border:none;
+    border-radius:10px;
+
+    background:#93c5fd;
+    color:white;
+    font-size:15px;
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+button:hover{
+    background:#60a5fa;
+    transform:translateY(-2px);
+}
+
+button:active{
+    transform:scale(.98);
+}
