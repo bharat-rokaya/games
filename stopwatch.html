@@ -1,262 +1,248 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reaction Stopwatch</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reaction Stopwatch</title>
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
 
-body{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(-45deg,#667eea,#764ba2,#23a6d5,#23d5ab);
-    background-size:400% 400%;
-    animation:bg 10s ease infinite;
-}
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(-45deg, #667eea, #764ba2, #23a6d5, #23d5ab);
+        background-size: 400% 400%;
+        animation: bg 10s ease infinite;
+      }
 
-@keyframes bg{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-}
+      @keyframes bg {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
 
-.container{
-    width:420px;
-    padding:35px;
-    border-radius:25px;
-    background:rgba(255,255,255,.12);
-    backdrop-filter:blur(20px);
-    color:white;
-    text-align:center;
-    box-shadow:0 10px 35px rgba(0,0,0,.35);
-}
+      .container {
+        width: 420px;
+        padding: 35px;
+        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(20px);
+        color: white;
+        text-align: center;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+      }
 
-h1{
-    margin-bottom:20px;
-    letter-spacing:2px;
-}
+      h1 {
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+      }
 
-.target{
-    font-size:1.2rem;
-    margin-bottom:20px;
-}
+      .target {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+      }
 
-.target span{
-    color:#ffe66d;
-    font-weight:bold;
-}
+      .target span {
+        color: #ffe66d;
+        font-weight: bold;
+      }
 
-.timer{
-    font-size:72px;
-    font-weight:bold;
-    margin:20px 0;
-    text-shadow:0 0 15px rgba(255,255,255,.4);
-}
+      .timer {
+        font-size: 72px;
+        font-weight: bold;
+        margin: 20px 0;
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+      }
 
-.message{
-    height:28px;
-    margin-bottom:20px;
-    font-size:18px;
-    font-weight:bold;
-}
+      .message {
+        height: 28px;
+        margin-bottom: 20px;
+        font-size: 18px;
+        font-weight: bold;
+      }
 
-.buttons{
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    flex-wrap:wrap;
-}
+      .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
 
-button{
-    border:none;
-    padding:15px 28px;
-    border-radius:12px;
-    font-size:17px;
-    cursor:pointer;
-    transition:.25s;
-    color:white;
-    font-weight:bold;
-}
+      button {
+        border: none;
+        padding: 15px 28px;
+        border-radius: 12px;
+        font-size: 17px;
+        cursor: pointer;
+        transition: 0.25s;
+        color: white;
+        font-weight: bold;
+      }
 
-button:hover{
-    transform:translateY(-3px) scale(1.05);
-}
+      button:hover {
+        transform: translateY(-3px) scale(1.05);
+      }
 
-#start{
-    background:#27ae60;
-}
+      #start {
+        background: #27ae60;
+      }
 
-#stop{
-    background:#e67e22;
-}
+      #stop {
+        background: #e67e22;
+      }
 
-#reset{
-    background:#e74c3c;
-}
+      #reset {
+        background: #e74c3c;
+      }
 
-.stats{
-    margin-top:25px;
-    display:flex;
-    justify-content:space-around;
-    font-size:15px;
-}
+      .stats {
+        margin-top: 25px;
+        display: flex;
+        justify-content: space-around;
+        font-size: 15px;
+      }
 
-.stats div{
-    background:rgba(255,255,255,.1);
-    padding:12px;
-    border-radius:10px;
-    width:45%;
-}
-</style>
-</head>
+      .stats div {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 12px;
+        border-radius: 10px;
+        width: 45%;
+      }
+    </style>
+  </head>
 
-<body>
+  <body>
+    <div class="container">
+      <h1>⏱ Stopwatch Game</h1>
 
-<div class="container">
+      <div class="target">Stop at <span id="stopValue"></span> seconds</div>
 
-<h1>⏱ Stopwatch Game</h1>
+      <div class="timer" id="Value">0.00</div>
 
-<div class="target">
-Stop at <span id="stopValue"></span> seconds
-</div>
+      <div class="message" id="message"></div>
 
-<div class="timer" id="Value">0.00</div>
+      <div class="buttons">
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <button id="reset">Reset</button>
+      </div>
 
-<div class="message" id="message"></div>
+      <div class="stats">
+        <div>
+          Best Difference
+          <h2 id="best">--</h2>
+        </div>
 
-<div class="buttons">
-<button id="start">Start</button>
-<button id="stop">Stop</button>
-<button id="reset">Reset</button>
-</div>
+        <div>
+          Current Difference
+          <h2 id="diff">--</h2>
+        </div>
+      </div>
+    </div>
 
-<div class="stats">
-<div>
-Best Difference
-<h2 id="best">--</h2>
-</div>
+    <script>
+      const stopValue = document.getElementById("stopValue");
+      const Value = document.getElementById("Value");
+      const start = document.getElementById("start");
+      const stop = document.getElementById("stop");
+      const reset = document.getElementById("reset");
+      const message = document.getElementById("message");
+      const diff = document.getElementById("diff");
+      const best = document.getElementById("best");
 
-<div>
-Current Difference
-<h2 id="diff">--</h2>
-</div>
-</div>
+      let count = 0;
+      let interval = null;
+      let target = 0;
+      let bestScore = Infinity;
 
-</div>
+      function format(v) {
+        return (v / 100).toFixed(2);
+      }
 
-<script>
+      function newTarget() {
+        target = Math.floor(Math.random() * 9901) + 100;
+        stopValue.textContent = format(target);
+      }
 
-const stopValue=document.getElementById("stopValue");
-const Value=document.getElementById("Value");
-const start=document.getElementById("start");
-const stop=document.getElementById("stop");
-const reset=document.getElementById("reset");
-const message=document.getElementById("message");
-const diff=document.getElementById("diff");
-const best=document.getElementById("best");
+      newTarget();
 
-let count=0;
-let interval=null;
-let target=0;
-let bestScore=Infinity;
+      function updateDisplay() {
+        Value.textContent = format(count);
+      }
 
-function format(v){
-    return (v/100).toFixed(2);
-}
+      function startTimer() {
+        if (interval) return;
 
-function newTarget(){
-    target=Math.floor(Math.random()*9901)+100;
-    stopValue.textContent=format(target);
-}
+        interval = setInterval(() => {
+          count++;
+          updateDisplay();
+        }, 10);
+      }
 
-newTarget();
+      start.onclick = () => {
+        startTimer();
+      };
 
-function updateDisplay(){
-    Value.textContent=format(count);
-}
+      stop.onclick = () => {
+        if (!interval) return;
 
-function startTimer(){
+        clearInterval(interval);
+        interval = null;
 
-    if(interval) return;
+        const difference = Math.abs(target - count);
 
-    interval=setInterval(()=>{
-        count++;
+        diff.textContent = format(difference);
+
+        if (difference < bestScore) {
+          bestScore = difference;
+          best.textContent = format(bestScore);
+        }
+
+        if (difference === 0) {
+          message.textContent = "🏆 PERFECT!";
+          message.style.color = "#2ecc71";
+        } else if (difference <= 5) {
+          message.textContent = "🔥 Amazing!";
+          message.style.color = "#2ecc71";
+        } else if (difference <= 15) {
+          message.textContent = "👏 Great!";
+          message.style.color = "#f1c40f";
+        } else if (difference <= 30) {
+          message.textContent = "🙂 Good!";
+          message.style.color = "#f39c12";
+        } else {
+          message.textContent = "❌ Try Again!";
+          message.style.color = "#ff6b6b";
+        }
+      };
+
+      reset.onclick = () => {
+        clearInterval(interval);
+        interval = null;
+
+        count = 0;
+
         updateDisplay();
-    },10);
 
-}
+        message.textContent = "";
+        diff.textContent = "--";
 
-start.onclick=()=>{
-
-    startTimer();
-
-};
-
-stop.onclick=()=>{
-
-    if(!interval) return;
-
-    clearInterval(interval);
-    interval=null;
-
-    const difference=Math.abs(target-count);
-
-    diff.textContent=format(difference);
-
-    if(difference<bestScore){
-        bestScore=difference;
-        best.textContent=format(bestScore);
-    }
-
-    if(difference===0){
-        message.textContent="🏆 PERFECT!";
-        message.style.color="#2ecc71";
-    }
-    else if(difference<=5){
-        message.textContent="🔥 Amazing!";
-        message.style.color="#2ecc71";
-    }
-    else if(difference<=15){
-        message.textContent="👏 Great!";
-        message.style.color="#f1c40f";
-    }
-    else if(difference<=30){
-        message.textContent="🙂 Good!";
-        message.style.color="#f39c12";
-    }
-    else{
-        message.textContent="❌ Try Again!";
-        message.style.color="#ff6b6b";
-    }
-
-};
-
-reset.onclick=()=>{
-
-    clearInterval(interval);
-    interval=null;
-
-    count=0;
-
-    updateDisplay();
-
-    message.textContent="";
-    diff.textContent="--";
-
-    newTarget();
-
-};
-
-</script>
-
-</body>
+        newTarget();
+      };
+    </script>
+  </body>
 </html>
